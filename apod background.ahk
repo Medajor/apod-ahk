@@ -4,6 +4,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #include <JSON> 
 
+filepath := "C:\Users\hirsh\Pictures\apod.jpg"
 
 IniRead, API_Key   ,Auth.ini,API, Key
 
@@ -16,8 +17,8 @@ Response := HTTP.ResponseText
 ;MsgBox, 0, , %Response%
 parsed := JSON.load(Response)
 url := parsed.hdurl
-UrlDownloadToFile, %url%, C:\Users\hirsh\Pictures\apod.jpg
-DllCall("SystemParametersInfo", UInt, 0x14, UInt, 0, Str, "C:\Users\hirsh\Pictures\apod.jpg", UInt, 2)
+UrlDownloadToFile, %url%, %filepath%
+DllCall("SystemParametersInfo", UInt, 0x14, UInt, 0, Str, %filepath%, UInt, 2)
 
 
 SetTimer, check, 10800000	
@@ -31,8 +32,8 @@ check:
 	;MsgBox, 0, , %Response%
 	parsed := JSON.load(Response)
 	url := parsed.hdurl
-	UrlDownloadToFile, %url%, C:\Users\hirsh\Pictures\apod.jpg
-	DllCall("SystemParametersInfo", UInt, 0x14, UInt, 0, Str, "C:\Users\hirsh\Pictures\apod.jpg", UInt, 2)
+	UrlDownloadToFile, %url%, %filepath%
+	DllCall("SystemParametersInfo", UInt, 0x14, UInt, 0, Str, %filepath%, UInt, 2)
 return
 
 
