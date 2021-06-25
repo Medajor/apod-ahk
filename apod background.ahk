@@ -4,12 +4,17 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #include <JSON> 
 
+
+;-----------------Please change these two per the readme!!!!---------------------
+
 filepath := "C:\Users\hirsh\Pictures\apod.jpg"
+EndPoint := "https://api.nasa.gov/planetary/apod?api_key=BmEpfiDDjJ0NF7B480RurPgntQrbBc3kGUdOHLnS"
+
+;---------------------------------------------------------------------------------
 
 IniRead, API_Key   ,Auth.ini,API, Key
 
 
-EndPoint := "https://api.nasa.gov/planetary/apod?api_key=BmEpfiDDjJ0NF7B480RurPgntQrbBc3kGUdOHLnS"
 HTTP := ComObjCreate("WinHttp.WinHttpRequest.5.1")
 HTTP.Open("GET",EndPoint)
 HTTP.Send()
@@ -24,7 +29,6 @@ DllCall("SystemParametersInfo", UInt, 0x14, UInt, 0, Str, %filepath%, UInt, 2)
 SetTimer, check, 10800000	
 
 check:
-	EndPoint := "https://api.nasa.gov/planetary/apod?api_key=BmEpfiDDjJ0NF7B480RurPgntQrbBc3kGUdOHLnS"
 	HTTP := ComObjCreate("WinHttp.WinHttpRequest.5.1")
 	HTTP.Open("GET",EndPoint)
 	HTTP.Send()
