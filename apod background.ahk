@@ -22,8 +22,8 @@ Response := HTTP.ResponseText
 ;MsgBox, 0, , %Response%
 parsed := JSON.load(Response)
 url := parsed.hdurl
-UrlDownloadToFile, %url%, %filepath%
-DllCall("SystemParametersInfo", UInt, 0x14, UInt, 0, Str, %filepath%, UInt, 2)
+UrlDownloadToFile, url, filepath
+DllCall("SystemParametersInfo", UInt, 0x14, UInt, 0, Str, filepath, UInt, 2)
 
 
 SetTimer, check, 10800000	
@@ -36,8 +36,8 @@ check:
 	;MsgBox, 0, , %Response%
 	parsed := JSON.load(Response)
 	url := parsed.hdurl
-	UrlDownloadToFile, %url%, %filepath%
-	DllCall("SystemParametersInfo", UInt, 0x14, UInt, 0, Str, %filepath%, UInt, 2)
+	UrlDownloadToFile, url, filepath
+	DllCall("SystemParametersInfo", UInt, 0x14, UInt, 0, Str, filepath, UInt, 2)
 return
 
 
